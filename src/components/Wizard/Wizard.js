@@ -6,8 +6,8 @@ import './Wizard.css';
 import Axios from 'axios';
 
 export default class Wizard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       name: '',
@@ -17,27 +17,19 @@ export default class Wizard extends Component {
       zip: 0,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   //Add submit functionality through props
 
-  handleOnSubmit = e => {
-    const { id, name, address, city, state, zip } = this.state;
-    const listing = { name, address, city, state, zip };
-    Axios.post('/api/house', { listing }).then(res => {
-      setState({
-        name: name,
-        address: address,
-        city: city,
-        state: state,
-        zip: zip,
-      }).catch(err => {
-        console.log('.post did not fire correctly');
-      });
+  handleOnClick = e => {
+    Axios.post('/api/house', this.state).then(res => {
+      this.props.history.push('/');
     });
   };
 
   handleInputChange(e) {
+    e.preventDefault();
     const value = e.target.value;
     this.setState({
       [e.target.name]: value,
@@ -77,7 +69,7 @@ export default class Wizard extends Component {
             <input name='zip' inputChange={e => this.handleInputChange(e)} />
           </div>
         </div>
-        <button className='complete' onSubmit={e => this.handleOnSubmit(e)}>
+        <button className='complete' onClick={e => this.handleOnClick(e)}>
           Complete
         </button>
       </form>
