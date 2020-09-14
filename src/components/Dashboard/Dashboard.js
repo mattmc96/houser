@@ -5,6 +5,7 @@ import House from '../House/House';
 import Wizard from '../Wizard/Wizard';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
+import Axios from 'axios';
 
 export default class Dashboard extends Component {
   constructor() {
@@ -13,6 +14,13 @@ export default class Dashboard extends Component {
     this.state = {
       houses: [],
     };
+  }
+  componentDidMount() {
+    Axios.get('/api/houses').then(res => {
+      this.setState({
+        houses: res.data,
+      });
+    });
   }
 
   render() {
@@ -23,8 +31,8 @@ export default class Dashboard extends Component {
         <Link to='/wizard' className='dash-link'>
           <button className='dashboard-btn'>Add New Property </button>
         </Link>
-        {houses.map(item => {
-          return <House houses={item} />;
+        {houses.map((item, i) => {
+          return <House key={i} houses={item} />;
         })}
       </div>
     );

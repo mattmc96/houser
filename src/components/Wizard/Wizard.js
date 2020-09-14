@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Wizard.css';
+import Axios from 'axios';
 
 export default class Wizard extends Component {
   constructor() {
@@ -17,6 +18,24 @@ export default class Wizard extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
+
+  //Add submit functionality through props
+
+  handleOnSubmit = e => {
+    const { id, name, address, city, state, zip } = this.state;
+    const listing = { name, address, city, state, zip };
+    Axios.post('/api/house', { listing }).then(res => {
+      setState({
+        name: name,
+        address: address,
+        city: city,
+        state: state,
+        zip: zip,
+      }).catch(err => {
+        console.log('.post did not fire correctly');
+      });
+    });
+  };
 
   handleInputChange(e) {
     const value = e.target.value;
@@ -58,6 +77,9 @@ export default class Wizard extends Component {
             <input name='zip' inputChange={e => this.handleInputChange(e)} />
           </div>
         </div>
+        <button className='complete' onSubmit={e => this.handleOnSubmit(e)}>
+          Complete
+        </button>
       </form>
     );
   }
