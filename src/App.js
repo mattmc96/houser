@@ -1,12 +1,19 @@
+/** @format */
+
 import React from 'react';
-import logo from './logo.svg';
+import Header from './components/Header/Header';
+import { HashRouter } from 'react-router-dom';
+import routes from './routes';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-    
-    </div>
+    <HashRouter>
+      <div className='App'>
+        <Header />
+        {routes}
+      </div>
+    </HashRouter>
   );
 }
 

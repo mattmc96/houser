@@ -1,0 +1,33 @@
+/** @format */
+
+* {
+  box-sizing: border-box;
+}
+.cancel-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
+  right: -1000px;
+}
+
+.wizard-link {
+  text-decoration: none;
+}
+.div-1 {
+  display: inline;
+  position: relative;
+  left: -200px;
+}
+.div-2 {
+  display: inline;
+  position: relative;
+  left: -200px;
+}
+.div-3 {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  right: 500px;
+  column-gap: 20px;
+}

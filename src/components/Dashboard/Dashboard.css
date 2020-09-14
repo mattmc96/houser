@@ -1,0 +1,16 @@
+/** @format */
+
+* {
+  box-sizing: border-box;
+}
+.dashboard-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
+  right: -1000px;
+}
+
+.dash-link {
+  text-decoration: none;
+}
